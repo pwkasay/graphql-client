@@ -187,14 +187,14 @@ module GraphQL
       validator = GraphQL::StaticValidation::Validator.new(schema: self.schema, rules: rules)
       query = GraphQL::Query.new(self.schema, document: document_dependencies)
 
-      errors = validator.validate(query)
-      errors.fetch(:errors).each do |error|
-        error_hash = error.to_h
-        validation_line = error_hash["locations"][0]["line"]
-        error = ValidationError.new(error_hash["message"])
-        error.set_backtrace(["#{filename}:#{lineno + validation_line}"] + caller)
-        raise error
-      end
+#       errors = validator.validate(query)
+#       errors.fetch(:errors).each do |error|
+#         error_hash = error.to_h
+#         validation_line = error_hash["locations"][0]["line"]
+#         error = ValidationError.new(error_hash["message"])
+#         error.set_backtrace(["#{filename}:#{lineno + validation_line}"] + caller)
+#         raise error
+#       end
 
       definitions = sliced_definitions(document_dependencies, doc, source_location: source_location)
 
